@@ -3,7 +3,7 @@
 
     <string-array name="ld_activityScreenTitles">
         <item>Dashboard</item>
-        <item>My Account</item>
+        <item>Profile</item>
         <item>Messages</item>
         <item>Media</item>
         <item />

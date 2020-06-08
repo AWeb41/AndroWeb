@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- DIMENS FOR ZROCK APPLICATION-->
+	<dimen name="toolbar_start_title">72dp</dimen>
+	
+	<!-- DIMENS FOR ZROCK CONTENT-->
+	<dimen name="activity_vertical_margin">16dp</dimen>
+	<dimen name="activity_horizontal_margin">16dp</dimen>
+	
+</resources>

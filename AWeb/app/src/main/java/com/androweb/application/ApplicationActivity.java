@@ -1,9 +1,5 @@
 package com.androweb.application;
 
-import android.app.Fragment;
-import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
@@ -12,9 +8,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.app.Activity;
+import android.app.Fragment;
+import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import java.util.Arrays;
 
+import com.androweb.application.engine.app.chrome.Shared;
 import com.androweb.application.engine.app.dashboard.CenteredTextFragment;
 import com.androweb.application.engine.view.menu.DrawerAdapter;
 import com.androweb.application.engine.view.menu.DrawerItem;
@@ -22,6 +27,7 @@ import com.androweb.application.engine.view.menu.SimpleItem;
 import com.androweb.application.engine.view.menu.SpaceItem;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
+
 
 public class ApplicationActivity extends AppCompatActivity implements DrawerAdapter.OnItemSelectedListener {
 
@@ -35,7 +41,11 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
     private Drawable[] screenIcons;
 
     private SlidingRootNav slidingRootNav;
-
+	public static void github(Activity mContext){
+		String urlGithub = "https://aweb41.github.io/AWeb/";
+		Shared.setLink(mContext ,urlGithub);
+	}
+	
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,4 +127,21 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
     private int color(@ColorRes int res) {
         return ContextCompat.getColor(this, res);
     }
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		// TODO: Implement this method
+		menu.add("Info")
+		.setIcon(R.drawable.info)
+		.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener(){
+			@Override
+			public boolean onMenuItemClick(MenuItem item){
+				github(ApplicationActivity.this);
+				return false;
+			}
+		}).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
 }

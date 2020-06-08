@@ -1,6 +1,19 @@
 <resources>
+
+	<!-- STRING FOR ZROCK APPLICATION -->
     <string name="app_name">AWeb</string>
-    <string name="account_balance">Powered By</string>
+    <!-- STRING FOR ZROCK OPTIONS MENU -->
+	<string name="action_about">Tentang</string>
+	<string name="action_settings">Setelan</string>
+	<!-- STRING FOR ZROCK CONTENT -->
+	<string name="hello_world">Hei Dunia!</string>
+    <string name="splash_logo_desc">Splash Screen Logo</string>
+    <string name="hello_mil">Hello from the Mobile Innovation Lab!</string>
+	<string name="label_action_share">Hei Dunia!</string>
+	<string name="menu_item_title">Download</string>
+	
+	<string name="account_balance">Powered By</string>
     <string name="balance_currency">+</string>
     <string name="balance_amount">AndroWeb</string>
+	
 </resources>

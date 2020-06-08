@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">AWeb</string>
-    <string name="hello_world">Hello world!</string>
-
+    <string name="account_balance">Powered By</string>
+    <string name="balance_currency">+</string>
+    <string name="balance_amount">AndroWeb</string>
 </resources>

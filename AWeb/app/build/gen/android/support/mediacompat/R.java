@@ -2998,7 +2998,7 @@ containing a value of this type.
         public static final int clip_horizontal=0x7f070031;
         public static final int clip_vertical=0x7f070032;
         public static final int collapseActionView=0x7f070057;
-        public static final int container=0x7f07008e;
+        public static final int container=0x7f07008d;
         public static final int contentPanel=0x7f070067;
         public static final int coordinator=0x7f070091;
         public static final int custom=0x7f07006e;
@@ -3115,7 +3115,7 @@ containing a value of this type.
         public static final int title=0x7f070014;
         public static final int titleDividerNoCustom=0x7f070072;
         public static final int title_template=0x7f070070;
-        public static final int toolbar=0x7f07008d;
+        public static final int toolbar=0x7f07008e;
         public static final int top=0x7f07002d;
         public static final int topPanel=0x7f07006f;
         public static final int touch_outside=0x7f070092;

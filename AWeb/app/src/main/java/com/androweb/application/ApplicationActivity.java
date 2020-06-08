@@ -19,6 +19,8 @@ import android.view.MenuItem;
 
 import java.util.Arrays;
 
+
+import com.androweb.application.engine.app.gallery.GalleryActivity;
 import com.androweb.application.engine.app.chrome.Shared;
 import com.androweb.application.engine.app.dashboard.CenteredTextFragment;
 import com.androweb.application.engine.view.menu.DrawerAdapter;
@@ -27,6 +29,7 @@ import com.androweb.application.engine.view.menu.SimpleItem;
 import com.androweb.application.engine.view.menu.SpaceItem;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
+import android.content.Intent;
 
 
 public class ApplicationActivity extends AppCompatActivity implements DrawerAdapter.OnItemSelectedListener {
@@ -137,7 +140,9 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
 		.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener(){
 			@Override
 			public boolean onMenuItemClick(MenuItem item){
-				github(ApplicationActivity.this);
+				//github(ApplicationActivity.this);
+				Intent mApplication= new Intent(getApplication(), GalleryActivity.class);
+				startActivity(mApplication);
 				return false;
 			}
 		}).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);

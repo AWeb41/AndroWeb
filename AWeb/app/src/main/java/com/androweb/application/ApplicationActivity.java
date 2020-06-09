@@ -9,7 +9,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.app.Activity;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
+import android.content.Intent;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -29,7 +30,7 @@ import com.androweb.application.engine.view.menu.SimpleItem;
 import com.androweb.application.engine.view.menu.SpaceItem;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
-import android.content.Intent;
+import com.androweb.application.engine.app.profile.AsepMoFragment;
 
 
 public class ApplicationActivity extends AppCompatActivity implements DrawerAdapter.OnItemSelectedListener {
@@ -87,16 +88,28 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
 
     @Override
     public void onItemSelected(int position) {
+		if(position == POS_DASHBOARD){
+			showFragment(new AsepMoFragment());
+		}
+		if(position == POS_ACCOUNT){
+			
+		}
+		if(position == POS_MESSAGES){
+
+		}
+		if(position == POS_CART){
+			github(ApplicationActivity.this);
+		}
         if (position == POS_LOGOUT) {
             finish();
         }
         slidingRootNav.closeMenu();
-        Fragment selectedScreen = CenteredTextFragment.createFor(screenTitles[position]);
-        showFragment(selectedScreen);
+        //Fragment selectedScreen = CenteredTextFragment.createFor(screenTitles[position]);
+        //showFragment(selectedScreen);
     }
 
     private void showFragment(Fragment fragment) {
-        getFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();
     }
@@ -130,7 +143,15 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
     private int color(@ColorRes int res) {
         return ContextCompat.getColor(this, res);
     }
+	
+	public AsepMoFragment getFolderFragment()
+	{
+		Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.container);
+		if (fragment instanceof AsepMoFragment)
+			return (AsepMoFragment) fragment;
+		else return null;
 
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
@@ -140,13 +161,21 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
 		.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener(){
 			@Override
 			public boolean onMenuItemClick(MenuItem item){
-				//github(ApplicationActivity.this);
 				Intent mApplication= new Intent(getApplication(), GalleryActivity.class);
 				startActivity(mApplication);
 				return false;
 			}
 		}).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public void onBackPressed()
+	{
+		// TODO: Implement this method
+		//super.onBackPressed();
+		AsepMoFragment asepMo = new AsepMoFragment();
+		asepMo.onBack();
 	}
 	
 }

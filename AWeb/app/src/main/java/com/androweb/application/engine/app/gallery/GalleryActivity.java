@@ -11,13 +11,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.yarolegovich.discretescrollview.DiscreteScrollView;
+//import com.yarolegovich.discretescrollview.DiscreteScrollView;
 
 import java.util.List;
 
 public class GalleryActivity extends AppCompatActivity implements
-        DiscreteScrollView.ScrollListener<GalleryAdapter.ViewHolder>,
-        DiscreteScrollView.OnItemChangedListener<GalleryAdapter.ViewHolder>,
+        //DiscreteScrollView.ScrollListener<GalleryAdapter.ViewHolder>,
+        //DiscreteScrollView.OnItemChangedListener<GalleryAdapter.ViewHolder>,
         View.OnClickListener {
 
     private ArgbEvaluator evaluator;
@@ -35,12 +35,12 @@ public class GalleryActivity extends AppCompatActivity implements
 
         Gallery gallery = Gallery.get();
         List<Image> data = gallery.getData();
-        DiscreteScrollView itemPicker = (DiscreteScrollView) findViewById(R.id.item_picker);
+        /*DiscreteScrollView itemPicker = (DiscreteScrollView) findViewById(R.id.item_picker);
         itemPicker.setAdapter(new GalleryAdapter(data));
         itemPicker.addScrollListener(this);
         itemPicker.addOnItemChangedListener(this);
         itemPicker.scrollToPosition(1);
-
+		*/
         findViewById(R.id.home).setOnClickListener(this);
         findViewById(R.id.fab_share).setOnClickListener(this);
     }
@@ -57,7 +57,7 @@ public class GalleryActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
+    /*@Override
     public void onScroll(
             float currentPosition,
             int currentIndex, int newIndex,
@@ -77,7 +77,7 @@ public class GalleryActivity extends AppCompatActivity implements
             viewHolder.setOverlayColor(currentOverlayColor);
         }
     }
-
+*/
     private void share(View view) {
         Snackbar.make(view, R.string.msg_unsupported_op, Snackbar.LENGTH_SHORT).show();
     }

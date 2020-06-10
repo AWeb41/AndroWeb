@@ -37,6 +37,7 @@ import android.webkit.ConsoleMessage;
 import android.webkit.GeolocationPermissions.Callback;
 import android.webkit.JsPromptResult;
 import android.webkit.JsResult;
+import android.webkit.JavascriptInterface;
 import android.webkit.PermissionRequest;
 import android.webkit.WebStorage.QuotaUpdater;
 import android.webkit.CookieManager;
@@ -57,6 +58,7 @@ import java.util.Collection;
 import java.util.List;
 import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
+import android.widget.Toast;
 
 
 /** Advanced WebView component for Android that works as intended out of the box */
@@ -70,7 +72,16 @@ public class AdvancedWebView extends WebView {
 		void onDownloadRequested(String url, String suggestedFilename, String mimeType, long contentLength, String contentDisposition, String userAgent);
 		void onExternalPageRequest(String url);
 	}
+	
+	private Context context;
 
+	public class JavaScriptAction
+	{
+		@JavascriptInterface
+		public void onAction(){
+			Toast.makeText(context, "JavaScript On Action", Toast.LENGTH_SHORT).show();
+		}
+	}
 	public static final String PACKAGE_NAME_DOWNLOAD_MANAGER = "com.android.providers.downloads";
 	protected static final int REQUEST_CODE_FILE_PICKER = 51426;
 	protected static final String DATABASES_SUB_FOLDER = "/databases";
@@ -97,6 +108,7 @@ public class AdvancedWebView extends WebView {
 
 	public AdvancedWebView(Context context) {
 		super(context);
+		this.context = context;
 		init(context);
 	}
 
@@ -329,6 +341,7 @@ public class AdvancedWebView extends WebView {
 		mHttpHeaders.put(name, value);
 	}
 
+	
 	/**
 	 * Removes one of the HTTP headers that have previously been added via `addHttpHeader()`
 	 *
@@ -420,6 +433,14 @@ public class AdvancedWebView extends WebView {
 		webSettings.setLoadWithOverviewMode(enabled);
 		webSettings.setSupportZoom(enabled);
 		webSettings.setBuiltInZoomControls(enabled);
+		webSettings.setJavaScriptEnabled(true);
+	}
+
+	@Override
+	public void addJavascriptInterface(Object object, String name)
+	{
+		// TODO: Implement this method
+		super.addJavascriptInterface(object, name);
 	}
 
 	@SuppressLint({ "SetJavaScriptEnabled" })
@@ -1421,7 +1442,6 @@ public class AdvancedWebView extends WebView {
 				context.overridePendingTransition(0, 0);
 			}
 		}
-
 	}
-
+	
 }

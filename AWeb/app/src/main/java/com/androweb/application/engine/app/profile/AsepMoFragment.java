@@ -15,6 +15,7 @@ import android.webkit.WebViewClient;
 
 import com.androweb.application.R;
 import com.androweb.application.engine.widget.AdvancedWebView;
+import android.webkit.JavascriptInterface;
 
 public class AsepMoFragment extends Fragment implements AdvancedWebView.Listener 
 {
@@ -58,9 +59,17 @@ public class AsepMoFragment extends Fragment implements AdvancedWebView.Listener
 
 			});
 		mWebView.addHttpHeader("X-Requested-With", "");
+		mWebView.addJavascriptInterface(new JavaScriptAction(), "JsAction");
 		mWebView.loadUrl(TEST_PAGE_URL);
 	}
 
+	public class JavaScriptAction {
+        @JavascriptInterface
+        public void action() {
+            Toast.makeText(getActivity(), "Called from JavaScript", Toast.LENGTH_LONG).show();
+        }
+    }
+	
 	public void onBack()
 	{
 		if (!mWebView.onBackPressed()) { return; }

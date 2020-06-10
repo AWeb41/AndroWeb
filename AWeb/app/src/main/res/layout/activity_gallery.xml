@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".shop.ShopActivity">
 
-    <com.yarolegovich.discretescrollview.DiscreteScrollView
+    <!--<com.yarolegovich.discretescrollview.DiscreteScrollView
         android:id="@+id/item_picker"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/galleryBg"
-        app:dsv_orientation="vertical" />
+        app:dsv_orientation="vertical" />-->
 
     <ImageView
         android:id="@+id/home"

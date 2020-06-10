@@ -46,7 +46,7 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
 
     private SlidingRootNav slidingRootNav;
 	public static void github(Activity mContext){
-		String urlGithub = "https://aweb41.github.io/AWeb/";
+		String urlGithub = "https://aweb41.github.io/AsepMo/";
 		Shared.setLink(mContext ,urlGithub);
 	}
 	

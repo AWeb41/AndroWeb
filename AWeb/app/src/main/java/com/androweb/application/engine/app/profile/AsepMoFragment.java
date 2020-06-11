@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.webkit.WebView;
 import android.webkit.WebChromeClient;
@@ -16,17 +18,28 @@ import android.webkit.JavascriptInterface;
 
 import com.androweb.application.R;
 import com.androweb.application.engine.widget.AdvancedWebView;
+import com.androweb.application.ApplicationActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import com.androweb.application.engine.app.chrome.Utility;
+import android.support.design.widget.Snackbar;
 
 public class AsepMoFragment extends Fragment implements AdvancedWebView.Listener 
 {
 
 	private static final String TEST_PAGE_URL = "https://aweb41.github.io/AsepMo/";
+	static boolean ASWP_PBAR = true;
+	
 	private AdvancedWebView mWebView;
+	ProgressBar asw_progress;
+	LinearLayout coordinatorLayout;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		// TODO: Implement this method
+		setHasOptionsMenu(true);
 		return inflater.inflate(R.layout.fragment_profile_asepmo, container, false);
 	}
 
@@ -35,6 +48,14 @@ public class AsepMoFragment extends Fragment implements AdvancedWebView.Listener
 	{
 		// TODO: Implement this method
 		super.onViewCreated(view, savedInstanceState);
+		if (ASWP_PBAR) {
+            asw_progress = view.findViewById(R.id.msw_progress);
+        } else {
+            view.findViewById(R.id.msw_progress).setVisibility(View.GONE);
+        }
+		
+		coordinatorLayout = (LinearLayout) view.findViewById(R.id.content_asepmo);
+		
 		mWebView = (AdvancedWebView) view.findViewById(R.id.webview);
 		mWebView.setListener(getActivity(), this);
 		mWebView.setGeolocationEnabled(false);
@@ -51,6 +72,18 @@ public class AsepMoFragment extends Fragment implements AdvancedWebView.Listener
 			});
 		mWebView.setWebChromeClient(new WebChromeClient() {
 
+
+				//Getting webview rendering progress
+				@Override
+				public void onProgressChanged(WebView view, int p) {
+					if (ASWP_PBAR) {
+						asw_progress.setProgress(p);
+						if (p == 100) {
+							asw_progress.setProgress(0);
+						}
+					}
+				}
+				
 				@Override
 				public void onReceivedTitle(WebView view, String title) {
 					super.onReceivedTitle(view, title);
@@ -63,21 +96,94 @@ public class AsepMoFragment extends Fragment implements AdvancedWebView.Listener
 		mWebView.loadUrl(TEST_PAGE_URL);
 	}
 
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
+	{
+		// TODO: Implement this method
+		inflater.inflate(R.menu.browser, menu);
+
+        if (Utility.isBookmarked(getActivity(), mWebView.getUrl())) {
+            // change icon color
+            Utility.tintMenuIcon(getActivity().getApplicationContext(), menu.getItem(0), R.color.colorAccent);
+        } else {
+            Utility.tintMenuIcon(getActivity().getApplicationContext(), menu.getItem(0), android.R.color.white);
+        }
+		//super.onCreateOptionsMenu(menu, inflater);
+	}
+
+	@Override
+	public void onPrepareOptionsMenu(Menu menu)
+	{
+		// TODO: Implement this method
+		if (!mWebView.canGoBack()) {
+            menu.getItem(1).setEnabled(false);
+            menu.getItem(1).getIcon().setAlpha(130);
+        } else {
+            menu.getItem(1).setEnabled(true);
+            menu.getItem(1).getIcon().setAlpha(255);
+        }
+
+        if (!mWebView.canGoForward()) {
+            menu.getItem(2).setEnabled(false);
+            menu.getItem(2).getIcon().setAlpha(130);
+        } else {
+            menu.getItem(2).setEnabled(true);
+            menu.getItem(2).getIcon().setAlpha(255);
+        }
+		//super.onPrepareOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		// TODO: Implement this method
+		if (item.getItemId() == R.id.action_bookmark) {
+            // bookmark / unbookmark the url
+            Utility.bookmarkUrl(getActivity(), mWebView.getUrl());
+
+            String msg = Utility.isBookmarked(getActivity(), mWebView.getUrl()) ?
+				mWebView.getTitle() + "is Bookmarked!" :
+				mWebView.getTitle() + " removed!";
+            Snackbar snackbar = Snackbar
+				.make(coordinatorLayout, msg, Snackbar.LENGTH_LONG);
+            snackbar.show();
+
+            // refresh the toolbar icons, so that bookmark icon color changes
+            // depending on bookmark status
+            getActivity().invalidateOptionsMenu();
+        }
+
+        if (item.getItemId() == R.id.action_back) {
+            back();
+        }
+
+        if (item.getItemId() == R.id.action_forward) {
+            forward();
+        }
+		
+		return super.onOptionsItemSelected(item);
+	}
+	
+	// backward the browser navigation
+    public void back() {
+        if (mWebView.canGoBack()) {
+            mWebView.goBack();
+        }
+    }
+
+    // forward the browser navigation
+    public void forward() {
+        if (mWebView.canGoForward()) {
+            mWebView.goForward();
+        }
+    }
+	
 	public class JavaScriptAction {
         @JavascriptInterface
         public void action() {
             Toast.makeText(getActivity(), "Called from JavaScript", Toast.LENGTH_LONG).show();
         }
     }
-	
-	public void onBack()
-	{
-		if (mWebView.canGoBack()) {
-            mWebView.goBack();
-        }else{
-		    mWebView.onBackPressed();
-		}
-	}
 	
 	@SuppressLint("NewApi")
 	@Override
@@ -154,4 +260,6 @@ public class AsepMoFragment extends Fragment implements AdvancedWebView.Listener
 		 // download couldn't be handled because user has disabled download manager app on the device
 		 }*/
 	}
+	
+	
 }

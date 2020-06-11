@@ -15,14 +15,16 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ProgressBar;
 
 import java.util.Arrays;
 
 
 import com.androweb.application.engine.app.chrome.ChromeActivity;
-import com.androweb.application.engine.app.chrome.BrowserActivity;
+import com.androweb.application.engine.app.chrome.AWebActivity;
 import com.androweb.application.engine.app.dashboard.DashboardFragment;
 import com.androweb.application.engine.app.profile.ProfileFragment;
 import com.androweb.application.engine.app.profile.AsepMoFragment;
@@ -36,6 +38,8 @@ import com.androweb.application.engine.view.menu.SimpleItem;
 import com.androweb.application.engine.view.menu.SpaceItem;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
+import com.androweb.application.engine.app.chrome.BrowserActivity;
+import com.androweb.application.engine.app.chrome.Utility;
 
 
 public class ApplicationActivity extends AppCompatActivity implements DrawerAdapter.OnItemSelectedListener {
@@ -45,18 +49,23 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
     private static final int POS_MESSAGES = 2;
     private static final int POS_CART = 3;
     private static final int POS_LOGOUT = 5;
-
+	static boolean ASWP_PBAR = true;
+	
     private String[] screenTitles;
     private Drawable[] screenIcons;
-
+	ProgressBar asw_progress;
     private SlidingRootNav slidingRootNav;
+	public static void start(Context c){
+		Intent intent = new Intent(c, ApplicationActivity.class);
+        c.startActivity(intent);
+	}
+	
 	public static void github(Activity mContext){
 		String urlGithub = "https://aweb41.github.io/AsepMo/";
 		Shared.setLink(mContext ,urlGithub);
 	}
 	
 	String urlOpen = "https://aweb41.github.io/AsepMo/";
-	
 	public static void openInAppBrowser(Context c,String url) {
         Intent intent = new Intent(c, BrowserActivity.class);
         intent.putExtra("url", url);
@@ -102,17 +111,17 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
     @Override
     public void onItemSelected(int position) {
 		if(position == POS_DASHBOARD){
-			showFragment(new AsepMoFragment());
+			showFragment(new DashboardFragment());
 		}
 		if(position == POS_ACCOUNT){
-			showFragment(new ProfileFragment());
+			//showFragment(new ProfileFragment());
+			openInAppBrowser(ApplicationActivity.this,urlOpen);
 		}
 		if(position == POS_MESSAGES){
-			showFragment(new ProfileFragment());
+			showFragment(new MessageFragment());
 		}
 		if(position == POS_CART){
-			//github(ApplicationActivity.this);
-			openInAppBrowser(this, urlOpen);
+			showFragment(new StoreFragment());
 		}
         if (position == POS_LOGOUT) {
             finish();
@@ -122,7 +131,7 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
         //showFragment(selectedScreen);
     }
 
-    private void showFragment(Fragment fragment) {
+    public void showFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();
@@ -175,8 +184,25 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
 		.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener(){
 			@Override
 			public boolean onMenuItemClick(MenuItem item){
-				Intent mApplication= new Intent(getApplication(), ChromeActivity.class);
-				startActivity(mApplication);
+				int SPLASH_TIME_OUT = 2000;
+				new android.os.Handler().postDelayed(new Runnable() {
+
+						/*
+						 * Showing splash screen with a timer. This will be useful when you
+						 * want to show case your app logo / company
+						 */
+
+						@Override
+						public void run() {
+							// This method will be executed once the timer is over
+							// Start your app main activity
+							Intent i = new Intent(ApplicationActivity.this, AWebActivity.class);
+							startActivity(i);
+
+							// close this activity
+							finish();
+						}
+					}, SPLASH_TIME_OUT);
 				return false;
 			}
 		}).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
@@ -184,10 +210,24 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
 	}
 
 	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		// TODO: Implement this method
+		
+		return super.onOptionsItemSelected(item);
+	}
+
+	
+	@Override
 	public void onBackPressed()
 	{
 		// TODO: Implement this method
-		super.onBackPressed();
+		if(slidingRootNav.isMenuOpened()){
+			slidingRootNav.closeMenu();
+		}else{
+			super.onBackPressed();
+		}
+		
 	}
 	
 }

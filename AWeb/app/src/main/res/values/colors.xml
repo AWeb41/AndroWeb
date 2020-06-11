@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<color name="colorPrimary">#000000</color>
-    <color name="colorPrimaryDark">#000000</color>
+	<color name="colorPrimary">#3453d1</color>
+    <color name="colorPrimaryDark">#6d69ff</color>
     <color name="colorAccent">#FF4081</color>
 
+	<color name="colorProgress">#FD82B7</color>
+	<color name="colorProgressDark">#CD115D</color>
+	
     <color name="grayIconTint">#727272</color>
 
     <color name="shopAccent">#84ceca</color>

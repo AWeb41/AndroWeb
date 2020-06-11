@@ -24,6 +24,7 @@ import android.webkit.WebView;
 import android.webkit.WebChromeClient;
 import android.webkit.WebViewClient;
 import android.webkit.JavascriptInterface;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -34,7 +35,7 @@ public class BrowserActivity extends AppCompatActivity implements AdvancedWebVie
     private AdvancedWebView webView;
     private ProgressBar progressBar;
     private float m_downX;
-    CoordinatorLayout coordinatorLayout;
+    LinearLayout coordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,7 @@ public class BrowserActivity extends AppCompatActivity implements AdvancedWebVie
 
         webView = (AdvancedWebView) findViewById(R.id.webView);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.main_content);
+        coordinatorLayout = (LinearLayout) findViewById(R.id.main_content);
 
         initWebView();
 
@@ -183,11 +184,11 @@ public class BrowserActivity extends AppCompatActivity implements AdvancedWebVie
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.browser, menu);
 
-        if (Utils.isBookmarked(this, webView.getUrl())) {
+        if (Utility.isBookmarked(this, webView.getUrl())) {
             // change icon color
-            Utils.tintMenuIcon(getApplicationContext(), menu.getItem(0), R.color.colorAccent);
+            Utility.tintMenuIcon(getApplicationContext(), menu.getItem(0), R.color.colorAccent);
         } else {
-            Utils.tintMenuIcon(getApplicationContext(), menu.getItem(0), android.R.color.white);
+            Utility.tintMenuIcon(getApplicationContext(), menu.getItem(0), android.R.color.white);
         }
         return true;
     }
@@ -228,13 +229,12 @@ public class BrowserActivity extends AppCompatActivity implements AdvancedWebVie
 
         if (item.getItemId() == R.id.action_bookmark) {
             // bookmark / unbookmark the url
-            Utils.bookmarkUrl(this, webView.getUrl());
+            Utility.bookmarkUrl(this, webView.getUrl());
 
-            String msg = Utils.isBookmarked(this, webView.getUrl()) ?
+            String msg = Utility.isBookmarked(this, webView.getUrl()) ?
                     webView.getTitle() + "is Bookmarked!" :
                     webView.getTitle() + " removed!";
-            Snackbar snackbar = Snackbar
-                    .make(coordinatorLayout, msg, Snackbar.LENGTH_LONG);
+            Snackbar snackbar = Snackbar.make(coordinatorLayout, msg, Snackbar.LENGTH_LONG);
             snackbar.show();
 
             // refresh the toolbar icons, so that bookmark icon color changes
@@ -293,13 +293,6 @@ public class BrowserActivity extends AppCompatActivity implements AdvancedWebVie
 		super.onDestroy();
 		webView.onDestroy();
 	}
-
-	public class JavaScriptAction {
-        @JavascriptInterface
-        public void action() {
-            Toast.makeText(BrowserActivity.this, "Called from JavaScript", Toast.LENGTH_LONG).show();
-        }
-    }
 	
 	@Override
 	public void onBackPressed()
@@ -312,13 +305,66 @@ public class BrowserActivity extends AppCompatActivity implements AdvancedWebVie
 		}
 	}
 
-	
+	private boolean ASWP_PBAR = true;
     private class MyWebChromeClient extends WebChromeClient {
         Context context;
 
         public MyWebChromeClient(Context context) {
             super();
             this.context = context;
+        }
+		
+		//Getting webview rendering progress
+		@Override
+		public void onProgressChanged(WebView view, int p) {
+			if (ASWP_PBAR) {
+				progressBar.setProgress(p);
+				if (p == 100) {
+					progressBar.setProgress(0);
+				}
+			}
+		}
+
+		@Override
+		public void onReceivedTitle(WebView view, String title)
+		{
+			// TODO: Implement this method
+			super.onReceivedTitle(view, title);
+			Snackbar snackbar = Snackbar.make(coordinatorLayout, title, Snackbar.LENGTH_LONG);
+            snackbar.show();
+		}
+    }
+	
+	public class JavaScriptAction {
+		
+        @JavascriptInterface
+        public void action() {
+            //Toast.makeText(BrowserActivity.this, "Called from JavaScript", Toast.LENGTH_LONG).show();
+			Snackbar snackbar = Snackbar.make(coordinatorLayout, "AndroWeb", Snackbar.LENGTH_LONG);
+            snackbar.show();
+        }
+		
+		@JavascriptInterface
+        public void xterminal() {
+			int SPLASH_TIME_OUT = 2000;
+			new android.os.Handler().postDelayed(new Runnable() {
+
+					/*
+					 * Showing splash screen with a timer. This will be useful when you
+					 * want to show case your app logo / company
+					 */
+
+					@Override
+					public void run() {
+						// This method will be executed once the timer is over
+						// Start your app main activity
+						Intent i = new Intent(BrowserActivity.this, AWebActivity.class);
+						startActivity(i);
+
+						// close this activity
+						finish();
+					}
+				}, SPLASH_TIME_OUT);
         }
     }
 }

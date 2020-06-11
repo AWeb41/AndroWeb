@@ -1,17 +1,34 @@
 package com.androweb.application.engine.app.chrome;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+import com.androweb.application.R;
+
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.view.MenuItem;
+import android.view.View;
+
+import java.lang.ref.Reference;
+import java.lang.ref.WeakReference;
+import java.util.List;
+
 
 /**
  * Created by Ravi Tamada on 28/05/16.
  * www.androidhive.info
  */
-public class Utils {
+public class Utility {
 
     public static boolean isSameDomain(String url, String url1) {
         return getRootDomainUrl(url.toLowerCase()).equals(getRootDomainUrl(url1.toLowerCase()));
@@ -60,4 +77,27 @@ public class Utils {
         SharedPreferences pref = context.getSharedPreferences("androidhive", 0);
         return pref.getBoolean(url, false);
     }
+	
+	private static boolean underHoneyComb() {
+		return false;
+	}
+
+	private static boolean isLollipop() {
+		return Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP || Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP_MR1;
+	}
+
+	private static int getDialogTheme() {
+		return isLollipop() ? R.style.CustomLollipopDialogStyle : 0;
+	}
+
+	@SuppressLint("NewApi")
+	static AlertDialog.Builder getDialogBuilder(Context context) {
+		if (underHoneyComb()) {
+			return new AlertDialog.Builder(context);
+		} else {
+			return new AlertDialog.Builder(context, getDialogTheme());
+		}
+	}
+
+	
 }

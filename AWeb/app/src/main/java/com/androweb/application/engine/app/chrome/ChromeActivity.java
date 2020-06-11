@@ -259,7 +259,7 @@ public class ChromeActivity extends AppCompatActivity implements AdvancedWebView
 	public void onExternalPageRequest(String url)
 	{
 		// TODO: Implement this method
-		if (Utils.isSameDomain(postUrl, url)) {
+		if (Utility.isSameDomain(postUrl, url)) {
 			Intent intent = new Intent(ChromeActivity.this, ChromeActivity.class);
 			intent.putExtra("postUrl", url);
 			startActivity(intent);

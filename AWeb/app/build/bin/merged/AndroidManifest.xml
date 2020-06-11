@@ -22,7 +22,8 @@
         <activity
             android:name="com.androweb.application.ApplicationActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,13 +32,26 @@
         </activity>
         <activity
             android:name="com.androweb.application.engine.app.gallery.GalleryActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.androweb.application.engine.app.chrome.ChromeActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.androweb.application.engine.app.chrome.BrowserActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

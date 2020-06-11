@@ -21,16 +21,21 @@ import android.view.MenuItem;
 import java.util.Arrays;
 
 
+import com.androweb.application.engine.app.chrome.ChromeActivity;
+import com.androweb.application.engine.app.chrome.BrowserActivity;
+import com.androweb.application.engine.app.dashboard.DashboardFragment;
+import com.androweb.application.engine.app.profile.ProfileFragment;
+import com.androweb.application.engine.app.profile.AsepMoFragment;
+import com.androweb.application.engine.app.message.MessageFragment;
+import com.androweb.application.engine.app.store.StoreFragment;
 import com.androweb.application.engine.app.gallery.GalleryActivity;
 import com.androweb.application.engine.app.chrome.Shared;
-import com.androweb.application.engine.app.dashboard.CenteredTextFragment;
 import com.androweb.application.engine.view.menu.DrawerAdapter;
 import com.androweb.application.engine.view.menu.DrawerItem;
 import com.androweb.application.engine.view.menu.SimpleItem;
 import com.androweb.application.engine.view.menu.SpaceItem;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
-import com.androweb.application.engine.app.profile.AsepMoFragment;
 
 
 public class ApplicationActivity extends AppCompatActivity implements DrawerAdapter.OnItemSelectedListener {
@@ -49,6 +54,14 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
 		String urlGithub = "https://aweb41.github.io/AsepMo/";
 		Shared.setLink(mContext ,urlGithub);
 	}
+	
+	String urlOpen = "https://aweb41.github.io/AsepMo/";
+	
+	public static void openInAppBrowser(Context c,String url) {
+        Intent intent = new Intent(c, BrowserActivity.class);
+        intent.putExtra("url", url);
+        c.startActivity(intent);
+    }
 	
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,13 +105,14 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
 			showFragment(new AsepMoFragment());
 		}
 		if(position == POS_ACCOUNT){
-			
+			showFragment(new ProfileFragment());
 		}
 		if(position == POS_MESSAGES){
-
+			showFragment(new ProfileFragment());
 		}
 		if(position == POS_CART){
-			github(ApplicationActivity.this);
+			//github(ApplicationActivity.this);
+			openInAppBrowser(this, urlOpen);
 		}
         if (position == POS_LOGOUT) {
             finish();
@@ -161,7 +175,7 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
 		.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener(){
 			@Override
 			public boolean onMenuItemClick(MenuItem item){
-				Intent mApplication= new Intent(getApplication(), GalleryActivity.class);
+				Intent mApplication= new Intent(getApplication(), ChromeActivity.class);
 				startActivity(mApplication);
 				return false;
 			}
@@ -173,9 +187,7 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
 	public void onBackPressed()
 	{
 		// TODO: Implement this method
-		//super.onBackPressed();
-		AsepMoFragment asepMo = new AsepMoFragment();
-		asepMo.onBack();
+		super.onBackPressed();
 	}
 	
 }

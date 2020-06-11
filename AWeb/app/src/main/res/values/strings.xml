@@ -40,4 +40,8 @@
     <string name="pref_key_transition_time" translatable="false">pref_key_transition_time</string>
 
     <string name="mi_rate_on_github">Rate on GitHub</string>
+	<string name="action_back">Back</string>
+    <string name="action_forward">Forward</string>
+    <string name="action_bookmark">Bookmark</string>
+	
 </resources>

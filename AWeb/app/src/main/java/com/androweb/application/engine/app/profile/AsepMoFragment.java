@@ -12,15 +12,15 @@ import android.widget.Toast;
 import android.webkit.WebView;
 import android.webkit.WebChromeClient;
 import android.webkit.WebViewClient;
+import android.webkit.JavascriptInterface;
 
 import com.androweb.application.R;
 import com.androweb.application.engine.widget.AdvancedWebView;
-import android.webkit.JavascriptInterface;
 
 public class AsepMoFragment extends Fragment implements AdvancedWebView.Listener 
 {
 
-	private static final String TEST_PAGE_URL = "https://aweb41.github.io/AWeb/";
+	private static final String TEST_PAGE_URL = "https://aweb41.github.io/AsepMo/";
 	private AdvancedWebView mWebView;
 	
 	@Override
@@ -72,8 +72,11 @@ public class AsepMoFragment extends Fragment implements AdvancedWebView.Listener
 	
 	public void onBack()
 	{
-		if (!mWebView.onBackPressed()) { return; }
-		// ...
+		if (mWebView.canGoBack()) {
+            mWebView.goBack();
+        }else{
+		    mWebView.onBackPressed();
+		}
 	}
 	
 	@SuppressLint("NewApi")

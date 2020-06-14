@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@android:color/white"
+	android:orientation="vertical">
+
+	<Space
+		android:layout_width="wrap_content"
+		android:layout_height="45dp"/>
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:paddingLeft="24dp"
+		android:paddingRight="24dp"
+		android:paddingStart="24dp"
+		android:text="Present By"
+		android:textSize="12sp"/>
+
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:baselineAligned="false"
+		android:orientation="horizontal"
+		android:paddingLeft="10dp"
+		android:paddingRight="10dp">
+
+		<ImageView
+			android:layout_width="35dp"
+			android:layout_height="35dp"
+			android:src="@drawable/ic_youtube_player"
+			android:scaleType="fitXY"
+			android:paddingRight="10dp"
+			android:layout_gravity="center"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Yt Dashboard"
+			android:textSize="34sp"
+			android:textColor="#F4511A"
+			android:layout_marginLeft="10dp"/>
+
+	</LinearLayout>
+
+	<Space
+		android:layout_width="wrap_content"
+		android:layout_height="35dp"/>
+
+	<android.support.v7.widget.RecyclerView
+		android:id="@+id/list"
+		android:layout_width="240dp"
+		android:layout_height="wrap_content"/>
+
+	<Space
+		android:layout_width="wrap_content"
+		android:layout_height="48dp"/>
+
+</LinearLayout>
+

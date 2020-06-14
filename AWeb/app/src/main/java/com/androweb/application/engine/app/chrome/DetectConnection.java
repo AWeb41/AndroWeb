@@ -6,11 +6,10 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-class DetectConnection {
+public class DetectConnection {
     private static final String TAG = DetectConnection.class.getSimpleName();
     public static boolean isInternetAvailable(Context context){
-        NetworkInfo info = (NetworkInfo) ((ConnectivityManager)
-                context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+        NetworkInfo info = (NetworkInfo) ((ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
         if (info == null){
             return false;
         }else{

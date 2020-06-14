@@ -318,10 +318,12 @@ final class IntentHelper
 	}
 
 }
+
 interface OnClickButtonListener
 {
 	void onClickButton(int which);
 }
+
 final class UriHelper
 {
 

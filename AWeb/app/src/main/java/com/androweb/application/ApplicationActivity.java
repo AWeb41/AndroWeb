@@ -15,17 +15,25 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Build;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import java.util.Arrays;
 
 
 import com.androweb.application.engine.app.chrome.ChromeActivity;
 import com.androweb.application.engine.app.chrome.AWebActivity;
+import com.androweb.application.engine.app.chrome.BrowserActivity;
+import com.androweb.application.engine.app.chrome.Utility;
 import com.androweb.application.engine.app.dashboard.DashboardFragment;
+import com.androweb.application.engine.app.dashboard.youtube.DeveloperKey;
+import com.androweb.application.engine.app.dashboard.youtube.YoutubeDashboardActivity;
+import com.androweb.application.engine.app.dashboard.youtube.YoutubePlaylistFragment;
 import com.androweb.application.engine.app.profile.ProfileFragment;
 import com.androweb.application.engine.app.profile.AsepMoFragment;
 import com.androweb.application.engine.app.message.MessageFragment;
@@ -36,12 +44,9 @@ import com.androweb.application.engine.view.menu.DrawerAdapter;
 import com.androweb.application.engine.view.menu.DrawerItem;
 import com.androweb.application.engine.view.menu.SimpleItem;
 import com.androweb.application.engine.view.menu.SpaceItem;
+
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
-import com.androweb.application.engine.app.chrome.BrowserActivity;
-import com.androweb.application.engine.app.chrome.Utility;
-import android.widget.Toast;
-import com.androweb.application.engine.app.dashboard.YoutubePlaylistFragment;
 
 
 public class ApplicationActivity extends AppCompatActivity implements DrawerAdapter.OnItemSelectedListener
@@ -81,9 +86,13 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
 	{
+		
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_application);
-
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+		}
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -120,16 +129,18 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
 	{
 		if (position == POS_DASHBOARD)
 		{
-			showFragment(new AsepMoFragment());
+			showFragment(new DashboardFragment());
 		}
 		if (position == POS_ACCOUNT)
 		{
-			//showFragment(new ProfileFragment());
-			openInAppBrowser(ApplicationActivity.this, urlOpen);
+			Fragment AsepMo = AsepMoFragment.createFor(DeveloperKey.ASEPMO_PAGE_URL);
+			showFragment(AsepMo);
+			//openInAppBrowser(ApplicationActivity.this, urlOpen);	
 		}
 		if (position == POS_MESSAGES)
 		{
-			showFragment(new MessageFragment());
+			Fragment Message = AsepMoFragment.createFor(DeveloperKey.MESSAGE_PAGE_URL);
+			showFragment(Message);
 		}
 		if (position == POS_CART)
 		{
@@ -137,7 +148,12 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
 		}
         if (position == POS_LOGOUT)
 		{
-            finish();
+			new android.os.Handler().postDelayed(new Runnable(){
+				@Override
+				public void run(){
+					ApplicationActivity.this.finish();
+				}
+			},1200);
         }
         slidingRootNav.closeMenu();
         //Fragment selectedScreen = CenteredTextFragment.createFor(screenTitles[position]);
@@ -151,6 +167,15 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
 			.commit();
     }
 
+	public void onYoutubeDashboard(){
+		//showFragment(new YoutubeDashboard());
+	}
+	
+	public void onYoutubePlaylist(){
+		showFragment(new YoutubePlaylistFragment());
+	}
+	
+	
     private DrawerItem createItemFor(int position)
 	{
         return new SimpleItem(screenIcons[position], screenTitles[position])
@@ -195,31 +220,6 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
 		else return null;
 
 	}
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
-		// TODO: Implement this method
-		menu.add("Info")
-			.setIcon(R.drawable.ic_youtube_player)
-			.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener(){
-				@Override
-				public boolean onMenuItemClick(MenuItem item)
-				{
-					
-		            showFragment(new YoutubePlaylistFragment());
-					return false;
-				}
-			}).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-		return super.onCreateOptionsMenu(menu);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item)
-	{
-		// TODO: Implement this method
-
-		return super.onOptionsItemSelected(item);
-	}
 
 
 	@Override
@@ -230,8 +230,9 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
 		if (slidingRootNav.isMenuOpened())
 		{
 			slidingRootNav.closeMenu();
+		}else{
+			slidingRootNav.openMenu();
 		}
-		canGoBack();
 	}
 	
 	public void canGoBack()
@@ -240,8 +241,8 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
 		if (fragment.canGoBack())
 		{
 			fragment.goBack();
+		}else{
+			slidingRootNav.openMenu();
 		}
 	}
-
-
 }

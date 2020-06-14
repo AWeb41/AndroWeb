@@ -60,22 +60,22 @@ import com.androweb.application.ApplicationActivity;
 
 public class AWebActivity extends AppCompatActivity {
 
-	static boolean ASWP_JSCRIPT     = SmartWebView.ASWP_JSCRIPT;
-	static boolean ASWP_FUPLOAD     = SmartWebView.ASWP_FUPLOAD;
-	static boolean ASWP_CAMUPLOAD   = SmartWebView.ASWP_CAMUPLOAD;
-	static boolean ASWP_ONLYCAM		= SmartWebView.ASWP_ONLYCAM;
-	static boolean ASWP_MULFILE     = SmartWebView.ASWP_MULFILE;
-	static boolean ASWP_LOCATION    = SmartWebView.ASWP_LOCATION;
-	static boolean ASWP_RATINGS     = SmartWebView.ASWP_RATINGS;
-	static boolean ASWP_PBAR        = SmartWebView.ASWP_PBAR;
-	static boolean ASWP_ZOOM        = SmartWebView.ASWP_ZOOM;
-	static boolean ASWP_SFORM       = SmartWebView.ASWP_SFORM;
-	static boolean ASWP_OFFLINE		= SmartWebView.ASWP_OFFLINE;
-	static boolean ASWP_EXTURL		= SmartWebView.ASWP_EXTURL;
+	static boolean ASWP_JSCRIPT     = Shared.ASWP_JSCRIPT;
+	static boolean ASWP_FUPLOAD     = Shared.ASWP_FUPLOAD;
+	static boolean ASWP_CAMUPLOAD   = Shared.ASWP_CAMUPLOAD;
+	static boolean ASWP_ONLYCAM		= Shared.ASWP_ONLYCAM;
+	static boolean ASWP_MULFILE     = Shared.ASWP_MULFILE;
+	static boolean ASWP_LOCATION    = Shared.ASWP_LOCATION;
+	static boolean ASWP_RATINGS     = Shared.ASWP_RATINGS;
+	static boolean ASWP_PBAR        = Shared.ASWP_PBAR;
+	static boolean ASWP_ZOOM        = Shared.ASWP_ZOOM;
+	static boolean ASWP_SFORM       = Shared.ASWP_SFORM;
+	static boolean ASWP_OFFLINE		= Shared.ASWP_OFFLINE;
+	static boolean ASWP_EXTURL		= Shared.ASWP_EXTURL;
 
 	//Configuration variables
-	private static String ASWV_URL      = SmartWebView.ASWV_URL;
-	private static String ASWV_F_TYPE   = SmartWebView.ASWV_F_TYPE;
+	private static String ASWV_URL      = Shared.ASWV_URL;
+	private static String ASWV_F_TYPE   = Shared.ASWV_F_TYPE;
 
     public static String ASWV_HOST		= aswm_host(ASWV_URL);
 
@@ -556,9 +556,9 @@ public class AWebActivity extends AppCompatActivity {
         if (DetectConnection.isInternetAvailable(AWebActivity.this)) {
             AppRate.with(this)
                 .setStoreType(StoreType.GOOGLEPLAY)     //default is Google Play, other option is Amazon App Store
-                .setInstallDays(SmartWebView.ASWR_DAYS)
-                .setLaunchTimes(SmartWebView.ASWR_TIMES)
-				.setRemindInterval(SmartWebView.ASWR_INTERVAL)
+                .setInstallDays(Shared.ASWR_DAYS)
+                .setLaunchTimes(Shared.ASWR_TIMES)
+				.setRemindInterval(Shared.ASWR_INTERVAL)
                 .setTitle(R.string.rate_dialog_title)
                 .setMessage(R.string.rate_dialog_message)
                 .setTextLater(R.string.rate_dialog_cancel)

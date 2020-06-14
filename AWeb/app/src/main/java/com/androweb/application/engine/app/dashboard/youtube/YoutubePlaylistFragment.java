@@ -1,4 +1,4 @@
-package com.androweb.application.engine.app.dashboard;
+package com.androweb.application.engine.app.dashboard.youtube;
 
 import com.androweb.application.R;
 
@@ -32,8 +32,8 @@ public class YoutubePlaylistFragment extends Fragment {
     private RecyclerView mVideoRecyclerView;
     private YoutubePlaylistAdapter mVideoAdapter;
     Context context;
-    private String playlist_id;
-    private String browserKey;
+    //private String playlist_id;
+    //private String browserKey;
 	
     String loadMsg;
     String loadTitle;
@@ -50,11 +50,11 @@ public class YoutubePlaylistFragment extends Fragment {
 
         //show a long toast so user knows this screen is blank intentionally...
         //showToast("This screen is blank intentionally. See CM_anWatchList.java to see how little is required to launch a simple plugin.", "long");
-        playlist_id = "PLiKkX4KV1eFLUxsoE7fIDx5RDSC0qOdC4";
+        //playlist_id = "PLiKkX4KV1eFLUxsoE7fIDx5RDSC0qOdC4";
         int videoTxtColor = Color.parseColor("#000000");
         loadTitle = "Loading...";
         loadMsg = "Loading your videos...";
-        browserKey = "AIzaSyAYgHbHDXV1x-wSdJPqdPiwq-2GgdWEqWk";
+        //browserKey = "AIzaSyAYgHbHDXV1x-wSdJPqdPiwq-2GgdWEqWk";
         int cornerRadius = 5;
         int cardColor = Color.parseColor("#FFFFFF");
         int recyclerColor = Color.parseColor("#ffffff");
@@ -63,7 +63,7 @@ public class YoutubePlaylistFragment extends Fragment {
         mVideoRecyclerView = (RecyclerView) thisScreensView.findViewById(R.id.yt_recycler_view);
         mVideoRecyclerView.setBackgroundColor(recyclerColor);
         mVideoRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mVideoAdapter = new YoutubePlaylistAdapter(displaylistArray, browserKey, getActivity(), cornerRadius, cardColor, videoTxtColor);
+        mVideoAdapter = new YoutubePlaylistAdapter(displaylistArray, DeveloperKey.BROWSER_KEY, getActivity(), cornerRadius, cardColor, videoTxtColor);
         mVideoRecyclerView.setAdapter(mVideoAdapter);
 
         new TheTask().execute();
@@ -99,7 +99,7 @@ public class YoutubePlaylistFragment extends Fragment {
             try
             {
 
-                String url = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=" + playlist_id+ "&key=" + browserKey + "&maxResults=50";
+                String url = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=" + DeveloperKey.PLAYLIST_ID + "&key=" + DeveloperKey.BROWSER_KEY + "&maxResults=50";
 
                 String response = getUrlString(url);
 

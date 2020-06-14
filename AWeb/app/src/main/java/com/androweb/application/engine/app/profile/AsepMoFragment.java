@@ -31,13 +31,21 @@ public class AsepMoFragment extends Fragment implements AdvancedWebView.Listener
 {
 
 	//private static final String TEST_PAGE_URL = "https://asepmo.github.io/AsepMo/";
-	private String TEST_PAGE_URL = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLiKkX4KV1eFLUxsoE7fIDx5RDSC0qOdC4&duration&key=AIzaSyAYgHbHDXV1x-wSdJPqdPiwq-2GgdWEqWk&maxResults=50";
 	
 	private static boolean ASWP_PBAR = true;
 	
 	private AdvancedWebView mWebView;
 	ProgressBar asw_progress;
 	LinearLayout coordinatorLayout;
+	private static final String EXTRA_TEXT = "text";
+
+    public static AsepMoFragment createFor(String text) {
+        AsepMoFragment fragment = new AsepMoFragment();
+        Bundle args = new Bundle();
+        args.putString(EXTRA_TEXT, text);
+        fragment.setArguments(args);
+        return fragment;
+    }
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -109,6 +117,7 @@ public class AsepMoFragment extends Fragment implements AdvancedWebView.Listener
 			});
 		mWebView.addHttpHeader("X-Requested-With", "");
 		mWebView.addJavascriptInterface(new JavaScriptAction(), "JsAction");
+		final String TEST_PAGE_URL = getArguments().getString(EXTRA_TEXT);
 		mWebView.loadUrl(TEST_PAGE_URL);
 	}
 	
@@ -130,7 +139,7 @@ public class AsepMoFragment extends Fragment implements AdvancedWebView.Listener
             // change icon color
             Utility.tintMenuIcon(getActivity().getApplicationContext(), menu.getItem(0), R.color.colorAccent);
         } else {
-            Utility.tintMenuIcon(getActivity().getApplicationContext(), menu.getItem(0), android.R.color.white);
+            Utility.tintMenuIcon(getActivity().getApplicationContext(), menu.getItem(0), android.R.color.black);
         }
 		//super.onCreateOptionsMenu(menu, inflater);
 	}
@@ -142,17 +151,21 @@ public class AsepMoFragment extends Fragment implements AdvancedWebView.Listener
 		if (!mWebView.canGoBack()) {
             menu.getItem(1).setEnabled(false);
             menu.getItem(1).getIcon().setAlpha(130);
+			Utility.tintMenuIcon(getActivity().getApplicationContext(), menu.getItem(1), android.R.color.darker_gray);
         } else {
             menu.getItem(1).setEnabled(true);
             menu.getItem(1).getIcon().setAlpha(255);
+			Utility.tintMenuIcon(getActivity().getApplicationContext(), menu.getItem(1), android.R.color.black);
         }
 
         if (!mWebView.canGoForward()) {
             menu.getItem(2).setEnabled(false);
             menu.getItem(2).getIcon().setAlpha(130);
+			Utility.tintMenuIcon(getActivity().getApplicationContext(), menu.getItem(2), android.R.color.darker_gray);
         } else {
             menu.getItem(2).setEnabled(true);
             menu.getItem(2).getIcon().setAlpha(255);
+			Utility.tintMenuIcon(getActivity().getApplicationContext(), menu.getItem(2), android.R.color.black);
         }
 		//super.onPrepareOptionsMenu(menu);
 	}
@@ -275,14 +288,16 @@ public class AsepMoFragment extends Fragment implements AdvancedWebView.Listener
 	public void onDownloadRequested(String url, String suggestedFilename, String mimeType, long contentLength, String contentDisposition, String userAgent)
 	{
 		// TODO: Implement this method
-		Toast.makeText(getActivity(), "onDownloadRequested(url = "+url+",  suggestedFilename = "+suggestedFilename+",  mimeType = "+mimeType+",  contentLength = "+contentLength+",  contentDisposition = "+contentDisposition+",  userAgent = "+userAgent+")", Toast.LENGTH_LONG).show();
-
-		/*if (AdvancedWebView.handleDownload(this, url, suggestedFilename)) {
+		
+		if (AdvancedWebView.handleDownload(getActivity(), url, suggestedFilename)) {
 		 // download successfully handled
+			Toast.makeText(getActivity(), "onDownloadRequested(url = "+url+",  suggestedFilename = "+suggestedFilename+",  mimeType = "+mimeType+",  contentLength = "+contentLength+",  contentDisposition = "+contentDisposition+",  userAgent = "+userAgent+")", Toast.LENGTH_LONG).show();
 		 }
 		 else {
-		 // download couldn't be handled because user has disabled download manager app on the device
-		 }*/
+		 String error =  "download couldn't be handled because user has disabled download manager app on the device";
+			 Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
+			 
+		 }
 	}
 	
 	

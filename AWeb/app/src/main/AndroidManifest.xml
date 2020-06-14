@@ -54,6 +54,8 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+			<meta-data android:name="@string/minVersion" android:value="8"/>
+			<meta-data android:name="@string/isLaunchableActivity" android:value="true"/>
         </activity>
 		
 		<activity
@@ -90,6 +92,19 @@
 
         <activity android:name="com.androweb.application.engine.app.chrome.BrowserActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+		<activity
+            android:name="com.androweb.application.engine.app.dashboard.youtube.YoutubeDashboardActivity"
+			android:theme="@style/YoutubeTheme.NoActionBar"
+		    android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+			<meta-data android:name="@string/minVersion" android:value="8"/>
+			<meta-data android:name="@string/isLaunchableActivity" android:value="true"/>
+        </activity>
+		
     </application>
 
 </manifest>

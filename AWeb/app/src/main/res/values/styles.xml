@@ -23,6 +23,17 @@
         <item name="android:windowActionBar">false</item>
     </style>
 	
+	 <style name="YoutubeTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+	
+    <style name="YoutubeTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+	
     <style name="ProDialogue" parent="@android:style/Theme.Dialog">
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/colorPrimary</item>

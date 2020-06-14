@@ -18,5 +18,27 @@
         <item>0</item>
         <item>@drawable/ic_logout_grey600_24dp</item>
     </array>
+	
+	<string-array name="ld_youtubeDashboardTitles">
+        <item>Video Me</item>
+        <item>Playlist</item>
+        <item>User</item>
+        <item>Search Result</item>
+		<item>Upload</item>
+		<item>Download</item>
+        <item />
+        <item>Home</item>
+    </string-array>
 
+    <array name="ld_youtubeDashboardIcons">
+        <item>@android:drawable/ic_input_add</item>
+        <item>@android:drawable/ic_input_add</item>
+        <item>@android:drawable/ic_input_add</item>
+        <item>@android:drawable/ic_input_add</item>
+		<item>@android:drawable/ic_input_add</item>
+		<item>@android:drawable/ic_input_add</item>
+        <item>0</item>
+        <item>@drawable/ic_home_outline_grey600_24dp</item>
+    </array>
+	
 </resources>

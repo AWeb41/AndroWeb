@@ -65,4 +65,7 @@
 	<string name="went_wrong">Something Went Wrong!</string>
 	<string name="check_connection">Please check your Network Connection!</string>
 	<string name="share_w_friends">Share with your Friends</string>
+	<!-- Content descriptions -->
+	<string name="descr_image">Image</string>
+	
 </resources>

@@ -10,9 +10,11 @@ import android.view.MenuItem;
 import android.view.MenuInflater;
 
 import com.androweb.application.R;
+import com.androweb.application.ApplicationActivity;
+import com.androweb.application.engine.app.gallery.VideoFragment;
 import com.androweb.application.engine.app.dashboard.youtube.YoutubeDashboardActivity;
 
-public class StoreFragment extends Fragment
+public class MediaFragment extends Fragment implements View.OnClickListener
 {
 
 	@Override
@@ -28,27 +30,20 @@ public class StoreFragment extends Fragment
 		// TODO: Implement this method
 		super.onViewCreated(view, savedInstanceState);
 		setHasOptionsMenu(true);
-	}
-
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
-	{
-		// TODO: Implement this method
-		super.onCreateOptionsMenu(menu, inflater);
-		menu.add("Info")
-			.setIcon(R.drawable.ic_youtube_player)
-			.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener(){
-				@Override
-				public boolean onMenuItemClick(MenuItem item)
-				{
-
-		            //showFragment(new YoutubePlaylistFragment());
-					YoutubeDashboardActivity.start(getActivity());
-					return false;
-				}
-			}).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-		
+		view.findViewById(R.id.bankcardId2).setOnClickListener(this);
+	
 	}
 
 	
+	@Override
+	public void onClick(View v)
+	{
+		// TODO: Implement this method
+		switch(v.getId()){
+			case R.id.bankcardId2:
+				ApplicationActivity mApp = (ApplicationActivity)getActivity();
+				mApp.showFragment(new VideoFragment());
+				break;
+		}
+	}
 }

@@ -8,7 +8,8 @@ import android.view.View;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-public class DashboardFragment extends Fragment
+
+public class DashboardFragment extends Fragment implements View.OnClickListener
 {
 
 	@Override
@@ -23,6 +24,14 @@ public class DashboardFragment extends Fragment
 	{
 		// TODO: Implement this method
 		super.onViewCreated(view, savedInstanceState);
+		view.findViewById(R.id.bankcardId2).setOnClickListener(this);
 	}
+
+	@Override
+	public void onClick(View v)
+	{
+		// TODO: Implement this method
+	}
+
 	
 }

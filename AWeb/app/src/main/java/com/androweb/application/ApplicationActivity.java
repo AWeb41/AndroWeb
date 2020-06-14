@@ -37,7 +37,7 @@ import com.androweb.application.engine.app.dashboard.youtube.YoutubePlaylistFrag
 import com.androweb.application.engine.app.profile.ProfileFragment;
 import com.androweb.application.engine.app.profile.AsepMoFragment;
 import com.androweb.application.engine.app.message.MessageFragment;
-import com.androweb.application.engine.app.store.StoreFragment;
+import com.androweb.application.engine.app.store.MediaFragment;
 import com.androweb.application.engine.app.gallery.GalleryActivity;
 import com.androweb.application.engine.app.chrome.Shared;
 import com.androweb.application.engine.view.menu.DrawerAdapter;
@@ -144,7 +144,7 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
 		}
 		if (position == POS_CART)
 		{
-			showFragment(new StoreFragment());
+			showFragment(new MediaFragment());
 		}
         if (position == POS_LOGOUT)
 		{

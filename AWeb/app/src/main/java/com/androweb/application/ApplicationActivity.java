@@ -40,9 +40,12 @@ import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
 import com.androweb.application.engine.app.chrome.BrowserActivity;
 import com.androweb.application.engine.app.chrome.Utility;
+import android.widget.Toast;
+import com.androweb.application.engine.app.dashboard.CM_youtubePlaylist;
 
 
-public class ApplicationActivity extends AppCompatActivity implements DrawerAdapter.OnItemSelectedListener {
+public class ApplicationActivity extends AppCompatActivity implements DrawerAdapter.OnItemSelectedListener
+{
 
     private static final int POS_DASHBOARD = 0;
     private static final int POS_ACCOUNT = 1;
@@ -50,30 +53,34 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
     private static final int POS_CART = 3;
     private static final int POS_LOGOUT = 5;
 	static boolean ASWP_PBAR = true;
-	
+
     private String[] screenTitles;
     private Drawable[] screenIcons;
 	ProgressBar asw_progress;
     private SlidingRootNav slidingRootNav;
-	public static void start(Context c){
+	public static void start(Context c)
+	{
 		Intent intent = new Intent(c, ApplicationActivity.class);
         c.startActivity(intent);
 	}
-	
-	public static void github(Activity mContext){
+
+	public static void github(Activity mContext)
+	{
 		String urlGithub = "https://aweb41.github.io/AsepMo/";
-		Shared.setLink(mContext ,urlGithub);
+		Shared.setLink(mContext , urlGithub);
 	}
-	
+
 	String urlOpen = "https://aweb41.github.io/AsepMo/";
-	public static void openInAppBrowser(Context c,String url) {
+	public static void openInAppBrowser(Context c, String url)
+	{
         Intent intent = new Intent(c, BrowserActivity.class);
         intent.putExtra("url", url);
         c.startActivity(intent);
     }
-	
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState)
+	{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_application);
 
@@ -81,23 +88,23 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
         setSupportActionBar(toolbar);
 
         slidingRootNav = new SlidingRootNavBuilder(this)
-                .withToolbarMenuToggle(toolbar)
-                .withMenuOpened(false)
-                .withContentClickableWhenMenuOpened(false)
-                .withSavedState(savedInstanceState)
-                .withMenuLayout(R.layout.menu_left_drawer)
-                .inject();
+			.withToolbarMenuToggle(toolbar)
+			.withMenuOpened(false)
+			.withContentClickableWhenMenuOpened(false)
+			.withSavedState(savedInstanceState)
+			.withMenuLayout(R.layout.menu_left_drawer)
+			.inject();
 
         screenIcons = loadScreenIcons();
         screenTitles = loadScreenTitles();
 
         DrawerAdapter adapter = new DrawerAdapter(Arrays.asList(
-                createItemFor(POS_DASHBOARD).setChecked(true),
-                createItemFor(POS_ACCOUNT),
-                createItemFor(POS_MESSAGES),
-                createItemFor(POS_CART),
-                new SpaceItem(48),
-                createItemFor(POS_LOGOUT)));
+													  createItemFor(POS_DASHBOARD).setChecked(true),
+													  createItemFor(POS_ACCOUNT),
+													  createItemFor(POS_MESSAGES),
+													  createItemFor(POS_CART),
+													  new SpaceItem(48),
+													  createItemFor(POS_LOGOUT)));
         adapter.setListener(this);
 
         RecyclerView list = findViewById(R.id.list);
@@ -109,21 +116,27 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
     }
 
     @Override
-    public void onItemSelected(int position) {
-		if(position == POS_DASHBOARD){
-			showFragment(new DashboardFragment());
+    public void onItemSelected(int position)
+	{
+		if (position == POS_DASHBOARD)
+		{
+			showFragment(new AsepMoFragment());
 		}
-		if(position == POS_ACCOUNT){
+		if (position == POS_ACCOUNT)
+		{
 			//showFragment(new ProfileFragment());
-			openInAppBrowser(ApplicationActivity.this,urlOpen);
+			openInAppBrowser(ApplicationActivity.this, urlOpen);
 		}
-		if(position == POS_MESSAGES){
+		if (position == POS_MESSAGES)
+		{
 			showFragment(new MessageFragment());
 		}
-		if(position == POS_CART){
+		if (position == POS_CART)
+		{
 			showFragment(new StoreFragment());
 		}
-        if (position == POS_LOGOUT) {
+        if (position == POS_LOGOUT)
+		{
             finish();
         }
         slidingRootNav.closeMenu();
@@ -131,30 +144,36 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
         //showFragment(selectedScreen);
     }
 
-    public void showFragment(Fragment fragment) {
+    public void showFragment(Fragment fragment)
+	{
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, fragment)
-                .commit();
+			.replace(R.id.container, fragment)
+			.commit();
     }
 
-    private DrawerItem createItemFor(int position) {
+    private DrawerItem createItemFor(int position)
+	{
         return new SimpleItem(screenIcons[position], screenTitles[position])
-                .withIconTint(color(R.color.textColorSecondary))
-                .withTextTint(color(R.color.textColorPrimary))
-                .withSelectedIconTint(color(R.color.colorAccent))
-                .withSelectedTextTint(color(R.color.colorAccent));
+			.withIconTint(color(R.color.textColorSecondary))
+			.withTextTint(color(R.color.textColorPrimary))
+			.withSelectedIconTint(color(R.color.colorAccent))
+			.withSelectedTextTint(color(R.color.colorAccent));
     }
 
-    private String[] loadScreenTitles() {
+    private String[] loadScreenTitles()
+	{
         return getResources().getStringArray(R.array.ld_activityScreenTitles);
     }
 
-    private Drawable[] loadScreenIcons() {
+    private Drawable[] loadScreenIcons()
+	{
         TypedArray ta = getResources().obtainTypedArray(R.array.ld_activityScreenIcons);
         Drawable[] icons = new Drawable[ta.length()];
-        for (int i = 0; i < ta.length(); i++) {
+        for (int i = 0; i < ta.length(); i++)
+		{
             int id = ta.getResourceId(i, 0);
-            if (id != 0) {
+            if (id != 0)
+			{
                 icons[i] = ContextCompat.getDrawable(this, id);
             }
         }
@@ -163,10 +182,11 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
     }
 
     @ColorInt
-    private int color(@ColorRes int res) {
+    private int color(@ColorRes int res)
+	{
         return ContextCompat.getColor(this, res);
     }
-	
+
 	public AsepMoFragment getFolderFragment()
 	{
 		Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.container);
@@ -180,32 +200,16 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
 	{
 		// TODO: Implement this method
 		menu.add("Info")
-		.setIcon(R.drawable.info)
-		.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener(){
-			@Override
-			public boolean onMenuItemClick(MenuItem item){
-				int SPLASH_TIME_OUT = 2000;
-				new android.os.Handler().postDelayed(new Runnable() {
-
-						/*
-						 * Showing splash screen with a timer. This will be useful when you
-						 * want to show case your app logo / company
-						 */
-
-						@Override
-						public void run() {
-							// This method will be executed once the timer is over
-							// Start your app main activity
-							Intent i = new Intent(ApplicationActivity.this, AWebActivity.class);
-							startActivity(i);
-
-							// close this activity
-							finish();
-						}
-					}, SPLASH_TIME_OUT);
-				return false;
-			}
-		}).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+			.setIcon(R.drawable.ic_youtube_player)
+			.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener(){
+				@Override
+				public boolean onMenuItemClick(MenuItem item)
+				{
+					
+		            showFragment(new CM_youtubePlaylist());
+					return false;
+				}
+			}).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -213,21 +217,31 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
 		// TODO: Implement this method
-		
+
 		return super.onOptionsItemSelected(item);
 	}
 
-	
+
 	@Override
 	public void onBackPressed()
 	{
+
 		// TODO: Implement this method
-		if(slidingRootNav.isMenuOpened()){
+		if (slidingRootNav.isMenuOpened())
+		{
 			slidingRootNav.closeMenu();
-		}else{
-			super.onBackPressed();
 		}
-		
+		canGoBack();
 	}
 	
+	public void canGoBack()
+	{
+		AsepMoFragment fragment = (AsepMoFragment)getSupportFragmentManager().findFragmentById(R.id.container);
+		if (fragment.canGoBack())
+		{
+			fragment.goBack();
+		}
+	}
+
+
 }

@@ -1,12 +1,13 @@
 package com.androweb.application.engine.app.dashboard;
 
+import com.androweb.application.R;
+
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.View;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.androweb.application.R;
 public class DashboardFragment extends Fragment
 {
 

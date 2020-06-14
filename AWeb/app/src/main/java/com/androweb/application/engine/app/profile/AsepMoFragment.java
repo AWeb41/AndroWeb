@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.View;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -28,8 +30,10 @@ import android.support.design.widget.Snackbar;
 public class AsepMoFragment extends Fragment implements AdvancedWebView.Listener 
 {
 
-	private static final String TEST_PAGE_URL = "https://aweb41.github.io/AsepMo/";
-	static boolean ASWP_PBAR = true;
+	//private static final String TEST_PAGE_URL = "https://asepmo.github.io/AsepMo/";
+	private String TEST_PAGE_URL = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLiKkX4KV1eFLUxsoE7fIDx5RDSC0qOdC4&duration&key=AIzaSyAYgHbHDXV1x-wSdJPqdPiwq-2GgdWEqWk&maxResults=50";
+	
+	private static boolean ASWP_PBAR = true;
 	
 	private AdvancedWebView mWebView;
 	ProgressBar asw_progress;
@@ -62,6 +66,18 @@ public class AsepMoFragment extends Fragment implements AdvancedWebView.Listener
 		mWebView.setMixedContentAllowed(true);
 		mWebView.setCookiesEnabled(true);
 		mWebView.setThirdPartyCookiesEnabled(true);
+		/*mWebView.setOnKeyListener(new View.OnKeyListener(){
+				@Override
+				public boolean onKey(View v, int keyCode, KeyEvent event) {
+					if (keyCode == KeyEvent.KEYCODE_BACK
+						&& event.getAction() == MotionEvent.ACTION_UP
+						&& mWebView.canGoBack()) {
+						mWebView.goBack();
+						return true;
+					}
+					return false;
+				}
+		});*/
 		mWebView.setWebViewClient(new WebViewClient() {
 
 				@Override
@@ -95,7 +111,15 @@ public class AsepMoFragment extends Fragment implements AdvancedWebView.Listener
 		mWebView.addJavascriptInterface(new JavaScriptAction(), "JsAction");
 		mWebView.loadUrl(TEST_PAGE_URL);
 	}
+	
+	public boolean canGoBack() {
+		return mWebView.canGoBack();
+	}
 
+	public void goBack() {
+		mWebView.goBack();
+	}
+	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
 	{

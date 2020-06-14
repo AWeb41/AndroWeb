@@ -41,7 +41,7 @@ import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
 import com.androweb.application.engine.app.chrome.BrowserActivity;
 import com.androweb.application.engine.app.chrome.Utility;
 import android.widget.Toast;
-import com.androweb.application.engine.app.dashboard.CM_youtubePlaylist;
+import com.androweb.application.engine.app.dashboard.YoutubePlaylistFragment;
 
 
 public class ApplicationActivity extends AppCompatActivity implements DrawerAdapter.OnItemSelectedListener
@@ -206,7 +206,7 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
 				public boolean onMenuItemClick(MenuItem item)
 				{
 					
-		            showFragment(new CM_youtubePlaylist());
+		            showFragment(new YoutubePlaylistFragment());
 					return false;
 				}
 			}).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);

@@ -25,12 +25,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CM_youtubePlaylist extends Fragment {
+public class YoutubePlaylistFragment extends Fragment {
 
 
     List<Videos> displaylistArray = new ArrayList<Videos>();
     private RecyclerView mVideoRecyclerView;
-    private YT_recycler_adapter mVideoAdapter;
+    private YoutubePlaylistAdapter mVideoAdapter;
     Context context;
     private String playlist_id;
     private String browserKey;
@@ -63,7 +63,7 @@ public class CM_youtubePlaylist extends Fragment {
         mVideoRecyclerView = (RecyclerView) thisScreensView.findViewById(R.id.yt_recycler_view);
         mVideoRecyclerView.setBackgroundColor(recyclerColor);
         mVideoRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mVideoAdapter = new YT_recycler_adapter(displaylistArray, browserKey, getActivity(), cornerRadius, cardColor, videoTxtColor);
+        mVideoAdapter = new YoutubePlaylistAdapter(displaylistArray, browserKey, getActivity(), cornerRadius, cardColor, videoTxtColor);
         mVideoRecyclerView.setAdapter(mVideoAdapter);
 
         new TheTask().execute();

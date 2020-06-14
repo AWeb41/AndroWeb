@@ -17,7 +17,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class YT_recycler_adapter extends RecyclerView.Adapter<YT_recycler_adapter.MyViewHolder> {
+public class YoutubePlaylistAdapter extends RecyclerView.Adapter<YoutubePlaylistAdapter.MyViewHolder> {
 
     private List<Videos> videoList;
     String key;
@@ -32,12 +32,8 @@ public class YT_recycler_adapter extends RecyclerView.Adapter<YT_recycler_adapte
 		public TextView published;
         public ImageView imageView;
 
-
-
         public MyViewHolder(View view) {
             super(view);
-
-
             imageView = (ImageView)view.findViewById(R.id.video_thumbnail_image_view);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -74,7 +70,7 @@ public class YT_recycler_adapter extends RecyclerView.Adapter<YT_recycler_adapte
 
 
 
-    public YT_recycler_adapter(List<Videos> videoList, String yt_key, Activity activity, int cornerRadius, int cardColor, int textColor) {
+    public YoutubePlaylistAdapter(List<Videos> videoList, String yt_key, Activity activity, int cornerRadius, int cardColor, int textColor) {
         this.activity  = activity;
         this.key = yt_key;
         this.videoList = videoList;

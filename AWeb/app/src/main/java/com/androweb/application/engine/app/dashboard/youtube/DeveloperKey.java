@@ -23,11 +23,11 @@ public class DeveloperKey
 	public static final String USER_ID = "maulana8608";
 	
 	public static final String CHANNEL_YOUTUBE_URL = "https://m.youtube.com/watch?v=QrAsNq5h7hU";
-	public static final String PROFILE_PAGE_URL = "https://asepmo.github.io/AsepMo/";
+	public static final String PROFILE_PAGE_URL = "https://aweb41.github.io/AWeb/";
 	public static final String ASEPMO_PAGE_URL = "https://asepmo.github.io/AsepMo/";
 	public static final String MESSAGE_PAGE_URL = "https://aweb41.github.io/AWeb/";
 	public static final String XTERMINAL_PAGE_URL = "https://asepmo.github.io/AsepMo/";
-	public static final String AWEB_PAGE_URL = "https://asepmo.github.io/AsepMo/";
+	public static final String AWEB_PAGE_URL = "https://aweb41.github.io/AWeb/";
 	public static final String Y2MATE_PAGE_URL = "https://www.y2mate.com/en19";
 	
 }

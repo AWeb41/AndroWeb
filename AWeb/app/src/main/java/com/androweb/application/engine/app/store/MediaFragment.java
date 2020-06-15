@@ -30,8 +30,11 @@ public class MediaFragment extends Fragment implements View.OnClickListener
 		// TODO: Implement this method
 		super.onViewCreated(view, savedInstanceState);
 		setHasOptionsMenu(true);
+		view.findViewById(R.id.bankcardId).setOnClickListener(this);
+		view.findViewById(R.id.bankcardId1).setOnClickListener(this);
 		view.findViewById(R.id.bankcardId2).setOnClickListener(this);
-	
+		view.findViewById(R.id.bankcardId3).setOnClickListener(this);
+		
 	}
 
 	
@@ -40,6 +43,14 @@ public class MediaFragment extends Fragment implements View.OnClickListener
 	{
 		// TODO: Implement this method
 		switch(v.getId()){
+			case R.id.bankcardId:
+				ApplicationActivity mGallery = (ApplicationActivity)getActivity();
+				mGallery.openGallery(getActivity());
+				break;
+			case R.id.bankcardId1:
+				ApplicationActivity mAudio = (ApplicationActivity)getActivity();
+				mAudio.openGallery(getActivity());
+				break;
 			case R.id.bankcardId2:
 				ApplicationActivity mApp = (ApplicationActivity)getActivity();
 				mApp.showFragment(new VideoFragment());

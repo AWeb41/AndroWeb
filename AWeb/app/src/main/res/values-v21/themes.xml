@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<style name="FullScreenTheme" parent="FullScreenTheme.Base">
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
 
+    <style name="FullScreenTheme.Dark" parent="FullScreenTheme.Base.Dark">
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
     <style name="CustomLollipopDialogStyle" parent="android:Theme.Material.Light.Dialog.Alert">
         <item name="android:buttonBarButtonStyle">@style/CustomButtonBarButtonStyle</item>
         <item name="android:buttonBarStyle">@style/CustomButtonBarStyle</item>

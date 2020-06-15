@@ -43,6 +43,9 @@
 	<uses-permission
 		android:name="android.permission.VIBRATE"/>
 
+	<uses-permission
+		android:name="android.permission.SET_WALLPAPER"/>
+
 	<uses-feature
 		android:name="android.hardware.location.gps"/>
 
@@ -104,7 +107,7 @@
 		</activity>
 
 		<activity
-			android:name="com.androweb.application.engine.app.gallery.GalleryActivity"
+			android:name="com.androweb.application.engine.app.gallery.ZPhotoActivity"
 			android:theme="@style/AppTheme.NoActionBar"
 			android:screenOrientation="portrait">
 
@@ -188,6 +191,171 @@
 			<meta-data
 				android:name="@string/isLaunchableActivity"
 				android:value="true"/>
+
+		</activity>
+
+		<activity
+			android:name="com.androweb.application.engine.app.gallery.activities.GalleryActivity">
+
+			<intent-filter>
+
+				<action
+					android:name="android.intent.action.MAIN"/>
+
+				<category
+					android:name="android.intent.category.SAMPLE_CODE"/>
+
+			</intent-filter>
+
+			<intent-filter>
+
+				<action
+					android:name="android.intent.action.PICK"/>
+
+				<category
+					android:name="android.intent.category.DEFAULT"/>
+
+				<data
+					android:mimeType="image/*"/>
+
+				<data
+					android:mimeType="video/*"/>
+
+				<data
+					android:mimeType="vnd.android.cursor.dir/image"/>
+
+				<data
+					android:mimeType="vnd.android.cursor.dir/video"/>
+
+			</intent-filter>
+
+			<intent-filter>
+
+				<action
+					android:name="android.intent.action.GET_CONTENT"/>
+
+				<category
+					android:name="android.intent.category.OPENABLE"/>
+
+				<category
+					android:name="android.intent.category.DEFAULT"/>
+
+				<data
+					android:mimeType="image/*"/>
+
+				<data
+					android:mimeType="video/*"/>
+
+				<data
+					android:mimeType="vnd.android.cursor.dir/image"/>
+
+				<data
+					android:mimeType="vnd.android.cursor.dir/video"/>
+
+			</intent-filter>
+
+			<intent-filter>
+
+				<action
+					android:name="android.intent.action.SET_WALLPAPER"/>
+
+				<category
+					android:name="android.intent.category.DEFAULT"/>
+
+			</intent-filter>
+
+		</activity>
+
+		<activity
+			android:name="com.androweb.application.engine.app.gallery.activities.MediaActivity"
+			android:parentActivityName="com.androweb.application.engine.app.gallery.activities.GalleryActivity"/>
+
+		<activity
+			android:name="com.androweb.application.engine.app.gallery.activities.ViewPagerActivity"
+			android:parentActivityName="com.androweb.application.engine.app.gallery.activities.MediaActivity"
+			android:theme="@style/FullScreenTheme">
+
+			<intent-filter>
+
+				<action
+					android:name="com.android.camera.action.REVIEW"/>
+
+				<category
+					android:name="android.intent.category.BROWSABLE"/>
+
+				<category
+					android:name="android.intent.category.DEFAULT"/>
+
+				<data
+					android:mimeType="image/*"/>
+
+				<data
+					android:mimeType="video/*"/>
+
+			</intent-filter>
+
+		</activity>
+
+		<activity
+			android:name="com.androweb.application.engine.app.gallery.activities.AboutActivity"
+			android:label="@string/about"
+			android:parentActivityName="com.androweb.application.engine.app.activities.GalleryActivity"/>
+
+		<activity
+			android:name="com.androweb.application.engine.app.gallery.activities.LicenseActivity"
+			android:label="@string/third_party_licences"
+			android:parentActivityName="com.androweb.application.engine.app.gallery.activities.AboutActivity"/>
+
+		<activity
+			android:name="com.androweb.application.engine.app.gallery.activities.SettingsActivity"
+			android:label="@string/settings"
+			android:parentActivityName="com.androweb.application.engine.app.activities.GalleryActivity"/>
+
+		<activity
+			android:name="com.androweb.application.engine.app.gallery.activities.PhotoVideoActivity"/>
+
+		<activity
+			android:name="com.androweb.application.engine.app.gallery.activities.PhotoActivity"
+			android:theme="@style/FullScreenTheme">
+
+			<intent-filter>
+
+				<action
+					android:name="android.intent.action.VIEW"/>
+
+				<category
+					android:name="android.intent.category.BROWSABLE"/>
+
+				<category
+					android:name="android.intent.category.DEFAULT"/>
+
+				<data
+					android:mimeType="image/*"/>
+
+			</intent-filter>
+
+		</activity>
+
+		<activity
+			android:name="com.androweb.application.engine.app.gallery.activities.VideoActivity"
+			android:screenOrientation="sensor"
+			android:theme="@style/FullScreenTheme">
+
+			<intent-filter>
+
+				<action
+					android:name="android.intent.action.VIEW"/>
+
+				<category
+					android:name="android.intent.category.BROWSABLE"/>
+
+				<category
+					android:name="android.intent.category.DEFAULT"/>
+
+				<data
+					android:mimeType="video/*"/>
+
+			</intent-filter>
 
 		</activity>
 

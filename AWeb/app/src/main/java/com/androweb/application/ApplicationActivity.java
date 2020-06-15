@@ -38,7 +38,7 @@ import com.androweb.application.engine.app.profile.ProfileFragment;
 import com.androweb.application.engine.app.profile.AsepMoFragment;
 import com.androweb.application.engine.app.message.MessageFragment;
 import com.androweb.application.engine.app.store.MediaFragment;
-import com.androweb.application.engine.app.gallery.GalleryActivity;
+import com.androweb.application.engine.app.gallery.activities.GalleryActivity;
 import com.androweb.application.engine.app.chrome.Shared;
 import com.androweb.application.engine.view.menu.DrawerAdapter;
 import com.androweb.application.engine.view.menu.DrawerItem;
@@ -83,9 +83,15 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
         c.startActivity(intent);
     }
 
+	public static void openGallery(Context c)
+	{
+        Intent intent = new Intent(c, GalleryActivity.class);
+        c.startActivity(intent);
+    }
+	
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
-	{
+	{ 
 		
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_application);

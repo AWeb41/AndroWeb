@@ -37,7 +37,7 @@ import com.androweb.application.engine.app.dashboard.youtube.YoutubePlaylistFrag
 import com.androweb.application.engine.app.profile.ProfileFragment;
 import com.androweb.application.engine.app.profile.AsepMoFragment;
 import com.androweb.application.engine.app.message.MessageFragment;
-import com.androweb.application.engine.app.store.MediaFragment;
+import com.androweb.application.engine.app.media.MediaFragment;
 import com.androweb.application.engine.app.gallery.activities.GalleryActivity;
 import com.androweb.application.engine.app.chrome.Shared;
 import com.androweb.application.engine.view.menu.DrawerAdapter;
@@ -53,9 +53,9 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
 {
 
     private static final int POS_DASHBOARD = 0;
-    private static final int POS_ACCOUNT = 1;
+    private static final int POS_PROFILE = 1;
     private static final int POS_MESSAGES = 2;
-    private static final int POS_CART = 3;
+    private static final int POS_MEDIA = 3;
     private static final int POS_LOGOUT = 5;
 	static boolean ASWP_PBAR = true;
 
@@ -83,11 +83,12 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
         c.startActivity(intent);
     }
 
-	public static void openGallery(Context c)
+	public static void openPhoto(Context c)
 	{
         Intent intent = new Intent(c, GalleryActivity.class);
         c.startActivity(intent);
     }
+	
 	
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -115,9 +116,9 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
 
         DrawerAdapter adapter = new DrawerAdapter(Arrays.asList(
 													  createItemFor(POS_DASHBOARD).setChecked(true),
-													  createItemFor(POS_ACCOUNT),
+													  createItemFor(POS_PROFILE),
 													  createItemFor(POS_MESSAGES),
-													  createItemFor(POS_CART),
+													  createItemFor(POS_MEDIA),
 													  new SpaceItem(48),
 													  createItemFor(POS_LOGOUT)));
         adapter.setListener(this);
@@ -137,18 +138,16 @@ public class ApplicationActivity extends AppCompatActivity implements DrawerAdap
 		{
 			showFragment(new DashboardFragment());
 		}
-		if (position == POS_ACCOUNT)
+		if (position == POS_PROFILE)
 		{
-			Fragment AsepMo = AsepMoFragment.createFor(DeveloperKey.ASEPMO_PAGE_URL);
-			showFragment(AsepMo);
+			showFragment(new ProfileFragment());
 			//openInAppBrowser(ApplicationActivity.this, urlOpen);	
 		}
 		if (position == POS_MESSAGES)
 		{
-			Fragment Message = AsepMoFragment.createFor(DeveloperKey.MESSAGE_PAGE_URL);
-			showFragment(Message);
+			showFragment(new MessageFragment());
 		}
-		if (position == POS_CART)
+		if (position == POS_MEDIA)
 		{
 			showFragment(new MediaFragment());
 		}

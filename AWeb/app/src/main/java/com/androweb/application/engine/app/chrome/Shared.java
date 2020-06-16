@@ -7,9 +7,8 @@ import android.support.customtabs.CustomTabsServiceConnection;
 import android.support.customtabs.CustomTabsCallback;
 
 import com.androweb.application.R;
-import com.androweb.application.engine.app.GithubActivity;
+import com.androweb.application.engine.app.chrome.BrowserActivity;
 import com.androweb.application.engine.app.chrome.CustomTabActivityHelper;
-import com.androweb.application.engine.app.chrome.shared.*;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
@@ -78,9 +77,11 @@ public class Shared
         return PendingIntent.getBroadcast(mContext, 0, actionIntent, 0);
     }
 	
+	private static final String url = "https://github.com/AWeb41/";
 	private static PendingIntent zrockGithub(Activity mContext)
 	{
-        Intent actionIntent = new Intent(mContext, GithubActivity.class);
+        Intent actionIntent = new Intent(mContext, BrowserActivity.class);
+		actionIntent.putExtra("url", url);
         return PendingIntent.getActivity(mContext, 0, actionIntent, 0);
     }
 }

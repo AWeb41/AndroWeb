@@ -3,7 +3,7 @@ package com.androweb.application.engine.app.gallery.activities;
 import com.androweb.application.R;
 import com.androweb.application.engine.Constants;
 import com.androweb.application.engine.Engine.Config;
-import com.androweb.application.engine.app.gallery.Utils;
+import com.androweb.application.engine.app.gallery.utils.Utils;
 import com.androweb.application.engine.app.gallery.dialogs.ChangeSorting;
 import com.androweb.application.engine.app.gallery.models.Directory;
 import com.androweb.application.engine.app.gallery.adapters.DirectoryAdapter;
@@ -78,7 +78,7 @@ public class GalleryActivity extends SimpleActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_application_media_gallery);
 		
         mGridView = (GridView)findViewById(R.id.directories_grid);
 		mSwipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.directories_holder);

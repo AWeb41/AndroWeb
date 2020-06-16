@@ -35,6 +35,12 @@
 		android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
 	<uses-permission
+		android:name="android.permission.SET_DEBUG_APP"/>
+
+	<uses-permission
+		android:name="android.permission.GET_TOP_ACTIVITY_INFO"/>
+
+	<uses-permission
 		android:name="android.permission.CAMERA"/>
 
 	<uses-permission
@@ -107,23 +113,6 @@
 		</activity>
 
 		<activity
-			android:name="com.androweb.application.engine.app.gallery.ZPhotoActivity"
-			android:theme="@style/AppTheme.NoActionBar"
-			android:screenOrientation="portrait">
-
-			<intent-filter>
-
-				<action
-					android:name="android.intent.action.MAIN"/>
-
-				<category
-					android:name="android.intent.category.DEFAULT"/>
-
-			</intent-filter>
-
-		</activity>
-
-		<activity
 			android:name="com.androweb.application.engine.app.chrome.AWebActivity"
 			android:screenOrientation="portrait"
 			android:theme="@style/SplashTheme">
@@ -167,7 +156,19 @@
 
 		<activity
 			android:name="com.androweb.application.engine.app.chrome.BrowserActivity"
-			android:theme="@style/AppTheme.NoActionBar"/>
+			android:theme="@style/AppTheme.NoActionBar">
+
+			<intent-filter>
+
+				<action
+					android:name="android.intent.action.MAIN"/>
+
+				<category
+					android:name="android.intent.category.DEFAULT"/>
+
+			</intent-filter>
+
+		</activity>
 
 		<activity
 			android:name="com.androweb.application.engine.app.dashboard.youtube.YoutubeDashboardActivity"
@@ -195,7 +196,8 @@
 		</activity>
 
 		<activity
-			android:name="com.androweb.application.engine.app.gallery.activities.GalleryActivity">
+			android:name="com.androweb.application.engine.app.gallery.activities.GalleryActivity"
+			android:theme="@style/AppTheme.NoActionBar">
 
 			<intent-filter>
 
@@ -358,6 +360,12 @@
 			</intent-filter>
 
 		</activity>
+
+		<activity
+			android:name="com.androweb.application.engine.app.media.VideoPlayerActivity"
+			android:screenOrientation="sensor"
+			android:configChanges="orientation|keyboardHidden|screenSize"
+			android:label="Video Player"/>
 
 	</application>
 

@@ -3,7 +3,7 @@ package com.androweb.application.engine.app.gallery.fragments;
 import com.androweb.application.R;
 import com.androweb.application.engine.Constants;
 import com.androweb.application.engine.app.gallery.models.Medium;
-import com.androweb.application.engine.app.gallery.Utils;
+import com.androweb.application.engine.app.gallery.utils.Utils;
 
 import android.content.res.Configuration;
 import android.content.res.Resources;

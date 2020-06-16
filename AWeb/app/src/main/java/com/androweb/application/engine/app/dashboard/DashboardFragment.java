@@ -12,7 +12,7 @@ import android.view.MenuInflater;
 import com.androweb.application.R;
 import com.androweb.application.ApplicationActivity;
 import com.androweb.application.engine.app.profile.AsepMoFragment;
-import com.androweb.application.engine.app.gallery.VideoFragment;
+import com.androweb.application.engine.app.media.VideoFragment;
 import com.androweb.application.engine.app.dashboard.youtube.YoutubeDashboardActivity;
 import com.androweb.application.engine.app.dashboard.youtube.DeveloperKey;
 

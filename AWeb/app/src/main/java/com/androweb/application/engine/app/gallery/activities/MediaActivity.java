@@ -2,7 +2,7 @@ package com.androweb.application.engine.app.gallery.activities;
 
 import com.androweb.application.R;
 import com.androweb.application.engine.Constants;
-import com.androweb.application.engine.app.gallery.Utils;
+import com.androweb.application.engine.app.gallery.utils.Utils;
 import com.androweb.application.engine.app.gallery.models.Medium;
 import com.androweb.application.engine.app.gallery.dialogs.ChangeSorting;
 import com.androweb.application.engine.app.gallery.adapters.MediaAdapter;

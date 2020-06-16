@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools" 
 	package="com.androweb.application" 
 	android:installLocation="auto">
-	   <supports-screens
+	<supports-screens
         android:anyDensity="true"
         android:resizeable="true"
         android:smallScreens="true"
@@ -18,11 +18,13 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"  />
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SET_DEBUG_APP"/>
+	<uses-permission android:name="android.permission.GET_TOP_ACTIVITY_INFO"/>
 	<uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.SET_WALLPAPER"/>
-	
+
     <!-- remove location.gps feature if not using permission ACCESS_FINE_LOCATION -->
     <uses-feature android:name="android.hardware.location.gps" />
     <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
@@ -36,7 +38,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup"
 		android:resizeableActivity="true">
-		
+
 		<activity
             android:name="com.androweb.application.SplashScreen"
             android:label="@string/app_name"
@@ -46,7 +48,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-       
+
         <activity
             android:name="com.androweb.application.ApplicationActivity"
 			android:theme="@style/AppTheme.NoActionBar"
@@ -59,17 +61,6 @@
             </intent-filter>
 			<meta-data android:name="@string/minVersion" android:value="8"/>
 			<meta-data android:name="@string/isLaunchableActivity" android:value="true"/>
-        </activity>
-		
-		<activity
-            android:name="com.androweb.application.engine.app.gallery.ZPhotoActivity"
-			android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </activity>
 		<activity
             android:name="com.androweb.application.engine.app.chrome.AWebActivity"
@@ -94,7 +85,13 @@
         </activity>
 
         <activity android:name="com.androweb.application.engine.app.chrome.BrowserActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+			<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+		</activity>
 		<activity
             android:name="com.androweb.application.engine.app.dashboard.youtube.YoutubeDashboardActivity"
 			android:theme="@style/YoutubeTheme.NoActionBar"
@@ -108,7 +105,8 @@
 			<meta-data android:name="@string/isLaunchableActivity" android:value="true"/>
         </activity>
 		<activity
-            android:name="com.androweb.application.engine.app.gallery.activities.GalleryActivity">
+            android:name="com.androweb.application.engine.app.gallery.activities.GalleryActivity"
+			android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -207,6 +205,11 @@
                 <data android:mimeType="video/*"/>
             </intent-filter>
         </activity>
+		<activity
+            android:name="com.androweb.application.engine.app.media.VideoPlayerActivity"
+            android:screenOrientation="sensor"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Video Player"/>
     </application>
 
 </manifest>

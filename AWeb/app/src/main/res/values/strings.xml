@@ -67,6 +67,10 @@
 	<string name="share_w_friends">Share with your Friends</string>
 	<!-- Content descriptions -->
 	<string name="descr_image">Image</string>
+	<string name="download_complete">Download Complete</string>
+	<string name="downloading">Dowoading..</string>
+	<string name="exception">Downloading Error!</string>
+	
 	<string name="share_via">Share via</string>
     <string name="no_permissions">Not much to do in a gallery without accessing your storage</string>
     <string name="delete">Delete</string>
